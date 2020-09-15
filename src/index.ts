@@ -1,13 +1,16 @@
 import { Company } from "./Company";
 import { User } from "./User";
 
-// Load google api in html
-const API_KEY = process.env.GOOGLEMAP_API_KEY;
 const script = document.createElement("script");
-script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
-document.body.append(script);
+script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.API_KEY}&callback=initMap`;
+script.defer = true;
 
-const user = new User();
-const company = new Company();
-console.log(user);
-console.log(company);
+// @ts-ignore
+window.initMap = function () {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 1,
+    center: { lat: 0, lng: 0 },
+  });
+};
+
+document.body.appendChild(script);
