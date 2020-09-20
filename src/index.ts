@@ -1,3 +1,5 @@
+import { User } from "./User";
+import { Company } from "./Company";
 import { CustomMap } from "./CustomMap";
 
 const script = document.createElement("script");
@@ -6,7 +8,11 @@ script.defer = true;
 
 // @ts-ignore
 window.initMap = function () {
-  new CustomMap("map");
+  const user = new User();
+  const company = new Company();
+  const customMap = new CustomMap("map");
+  customMap.addUserMarker(user);
+  customMap.addCompanyMarker(company);
 };
 
 document.body.appendChild(script);
